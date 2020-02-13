@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy import Column, Date, Integer, String, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('sqlite:///SQL/database.db', echo=True)
+engine = create_engine('sqlite:///SQL/database.db')
 Base = declarative_base()
 
 class Addresses(Base):
@@ -23,7 +23,7 @@ class Addresses(Base):
     city_district= Column(String)
     neighbourhood= Column(String)
     postal_code= Column(String)
-    proccessed= Column(Boolean, default=False)
+    processed= Column(Boolean, default=False)
 
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
