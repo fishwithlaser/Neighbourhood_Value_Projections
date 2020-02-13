@@ -1,5 +1,7 @@
 # Neighbourhood_Value_Projections
 
+1. initialize database 
+>>> python -m SQL.init\_db
 
 
 To make this puppy work, you need to fetch an api key from: 
