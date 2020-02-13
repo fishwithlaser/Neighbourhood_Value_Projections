@@ -19,7 +19,6 @@ def raw_to_sql():
                     PID = int(datum['PID']),
                     house_number = int(datum['house_number']),
                     street_name = datum['street_name'],
-                    lat_long = datum['lat_long'],
                     status = datum['status'],
                     date_issued = datum['date_issued'],
                     date_expired = datum['date_expired'],

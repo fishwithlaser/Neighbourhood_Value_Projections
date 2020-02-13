@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine, ForeignKey
-from sqlalchemy import Column, Date, Integer, String
+from sqlalchemy import Column, Date, Integer, String, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 
 engine = create_engine('sqlite:///SQL/database.db', echo=True)
@@ -23,6 +23,7 @@ class Addresses(Base):
     city_district= Column(String)
     neighbourhood= Column(String)
     postal_code= Column(String)
+    proccessed= Column(Boolean, default=False)
 
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
