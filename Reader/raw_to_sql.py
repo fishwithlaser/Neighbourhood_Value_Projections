@@ -26,6 +26,7 @@ def raw_to_sql():
                     house_number = datum['house_number'],
                     street_name = datum['street_name'],
                     status = datum['status'],
+                    city = datum['city'],
                     date_issued = datum['date_issued'],
                     date_expired = datum['date_expired'],
                     description = datum['description']
