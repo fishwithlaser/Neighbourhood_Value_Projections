@@ -1,3 +1,5 @@
+
+import os
 from SQL.tools import get_engine
 from sqlalchemy.ext.declarative import declarative_base
 from SQL.init_db import Addresses
@@ -10,27 +12,40 @@ def raw_to_sql():
     from sqlalchemy.orm import sessionmaker
     Session = sessionmaker(bind=engine)
     session = Session()
-    print('getting data')
     #gets data
-    data = get_data('BuildingPermits/Kitchener.csv')
-    try: 
+
+    file_list = os.listdir('BuildingPermits')
+    
+    for filename in file_list:
+        data = get_data(os.path.join('BuildingPermits',filename))
+         
         for datum in data:
+
+            #semingly i dont actually get any data yet??
             Address = Addresses(
-                    PID = int(datum['PID']),
-                    house_number = int(datum['house_number']),
+                    house_number = datum['house_number'],
                     street_name = datum['street_name'],
                     status = datum['status'],
                     date_issued = datum['date_issued'],
                     date_expired = datum['date_expired'],
                     description = datum['description']
                     )
-            session.add(Address)
-    except Exception as e:
-        print(e)
-        print(datum)
+            try:
+                if len(str(datum['latitude']))>0:
+                    Addresses.latitude=datum['latitude']
+                    Addresses.longitude=datum['longitude']
+                    Addresses.status=1
+            except:
+                #if they don't exist then we are not done and dont set a statuse
+                pass
 
-    session.commit()
-    session.close()
+            session.add(Address)
+        #except Exception as e:
+        #    print(e)
+        #    print(datum)
+
+        session.commit()
+        session.close()
 
 if __name__ == "__main__":
     raw_to_sql()
